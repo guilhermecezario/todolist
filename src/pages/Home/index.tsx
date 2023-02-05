@@ -1,9 +1,13 @@
 import React from 'react';
 
-// import { Container } from './styles';
+import { Container } from './styles';
+
+import Form from '../../components/Form'
 
 export default function Home() {
-  return <div>
-    <p>Home</p>
-  </div>;
+  return (
+    <Container>
+      <Form />
+    </Container>
+  );
 }
