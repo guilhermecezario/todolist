@@ -42,3 +42,8 @@ export default function Form({ onSubmit }: FormProps) {
     </Container>
   );
 }
+
+Form.defaultProps = {
+  onSubmit: () => {
+  },
+}
