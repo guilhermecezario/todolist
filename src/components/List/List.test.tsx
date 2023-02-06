@@ -34,7 +34,7 @@ describe('List', () => {
     const input = screen.getByDisplayValue("task test")
 
     input.focus()
-    fireEvent.change(input, { target: { value: 'Picles' } });
+    fireEvent.change(input, { target: { value: 'update description' } });
     fireEvent.focusOut(input);
 
     expect(onUpdated).toHaveBeenCalledTimes(1);

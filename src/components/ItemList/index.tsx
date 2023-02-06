@@ -1,10 +1,10 @@
 import React, { ChangeEvent, useState } from 'react';
 
-import { Container } from './styles';
+import { Container, Button } from './styles';
 
 import { MdCheckCircleOutline, MdRadioButtonUnchecked } from "react-icons/md";
 
-interface Task {
+export interface Task {
   id: string,
   description: string,
   finished: boolean,
@@ -44,11 +44,13 @@ export default function ItemList({ task, onUpdated }: ItemListProps) {
 
   return (
     <Container>
-      {task.finished ? (
-        <MdCheckCircleOutline onClick={handleUpdateFinished} size={25}/>
-      ) : (
-        <MdRadioButtonUnchecked onClick={handleUpdateFinished} size={25}/>
-      )}
+      <Button onClick={handleUpdateFinished}>
+        {task.finished ? (
+          <MdCheckCircleOutline size={25}/>
+        ) : (
+          <MdRadioButtonUnchecked size={25}/>
+        )}
+      </Button>
 
       <input
         type="text"
@@ -59,4 +61,9 @@ export default function ItemList({ task, onUpdated }: ItemListProps) {
       />
     </Container>
   );
+}
+
+ItemList.defaultProps = {
+  onUpdated: () => {
+  },
 }

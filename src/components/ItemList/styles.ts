@@ -25,3 +25,8 @@ export const Container = styled.li`
     margin-left: 10px;
   }
 `;
+
+export const Button = styled.button`
+  background: none;
+  border: none;
+`;
