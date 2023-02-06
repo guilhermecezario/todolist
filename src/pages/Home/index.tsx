@@ -7,7 +7,7 @@ import List from '../../components/List'
 
 import { api } from '../../services/api';
 
-interface Task {
+export interface Task {
   id: string,
   description: string,
   finished: boolean,
