@@ -1,18 +1,18 @@
-import React from 'react';
+import React from "react";
 
-import { Container } from './styles';
+import { Container } from "./styles";
 
-import ItemList from '../ItemList'
+import ItemList from "../ItemList";
 
 export interface Task {
-  id: string,
-  description: string,
-  finished: boolean,
+  id: string;
+  description: string;
+  finished: boolean;
 }
 
 interface ListProps {
-  tasks: Task[],
-  onUpdated(task: Task): void
+  tasks: Task[];
+  onUpdated(task: Task): void;
 }
 
 export default function List({ tasks, onUpdated }: ListProps) {
@@ -28,5 +28,6 @@ export default function List({ tasks, onUpdated }: ListProps) {
 List.defaultProps = {
   tasks: [],
   onUpdated: () => {
+    // return empty
   },
-}
+};

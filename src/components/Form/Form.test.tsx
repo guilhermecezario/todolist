@@ -5,26 +5,28 @@ import Form from ".";
 
 jest.useFakeTimers();
 
-describe('Form', () => {
-    test('should render with all components', () => {
-        render(<Form />);
+describe("Form", () => {
+  test("should render with all components", () => {
+    render(<Form />);
 
-        expect(screen.getByText('Adicionar')).toBeInTheDocument();
-        expect(screen.getByPlaceholderText('Descreva a nova tarefa')).toBeInTheDocument();
-    });
+    expect(screen.getByText("Adicionar")).toBeInTheDocument();
+    expect(
+      screen.getByPlaceholderText("Descreva a nova tarefa")
+    ).toBeInTheDocument();
+  });
 
-    test('button should emit onSubmit event', () => {
-        const onSubmit = jest.fn();
+  test("button should emit onSubmit event", () => {
+    const onSubmit = jest.fn();
 
-        render(<Form onSubmit={onSubmit} />);
+    render(<Form onSubmit={onSubmit} />);
 
-        const input = screen.getByPlaceholderText('Descreva a nova tarefa')
-        fireEvent.change(input, {target: {value: 'Picles'}});
-        
-        const button = screen.getByRole('button')
+    const input = screen.getByPlaceholderText("Descreva a nova tarefa");
+    fireEvent.change(input, { target: { value: "Picles" } });
 
-        button.click();
+    const button = screen.getByRole("button");
 
-        expect(onSubmit).toHaveBeenCalledTimes(1);
-    });
+    button.click();
+
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+  });
 });

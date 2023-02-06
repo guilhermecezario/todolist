@@ -1,19 +1,19 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from "react";
 
-import { Container, Input, Button } from './styles';
+import { Container, Input, Button } from "./styles";
 
 interface Task {
-  id?: string, 
-  description: string,
-  finished: boolean,
+  id?: string;
+  description: string;
+  finished: boolean;
 }
 
 interface FormProps {
-  onSubmit(task: Task): void, 
+  onSubmit(task: Task): void;
 }
 
 export default function Form({ onSubmit }: FormProps) {
-  const [description, setDescription] = useState("") 
+  const [description, setDescription] = useState("");
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -21,7 +21,7 @@ export default function Form({ onSubmit }: FormProps) {
     onSubmit({
       description,
       finished: false,
-    })
+    });
   }
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -45,5 +45,6 @@ export default function Form({ onSubmit }: FormProps) {
 
 Form.defaultProps = {
   onSubmit: () => {
+    // return empty
   },
-}
+};

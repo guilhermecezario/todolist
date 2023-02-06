@@ -4,54 +4,54 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import ItemList, { Task } from ".";
 
 const task: Task = {
-  id: '1',
+  id: "1",
   description: "task test",
-  finished: false
-}
+  finished: false,
+};
 
-describe('ItemList', () => {
-  test('should render task', () => {
+describe("ItemList", () => {
+  test("should render task", () => {
     const { container } = render(<ItemList task={task} />);
 
     expect(container).toBeInTheDocument();
     expect(screen.getByDisplayValue(task.description)).toBeInTheDocument();
   });
 
-  test('should emit onUpdated event when updating finished', () => {
+  test("should emit onUpdated event when updating finished", () => {
     const onUpdated = jest.fn();
 
     render(<ItemList task={task} onUpdated={onUpdated} />);
 
-    const button = screen.getByRole('button')
+    const button = screen.getByRole("button");
 
     fireEvent.click(button);
 
     expect(onUpdated).toHaveBeenCalledTimes(1);
   });
 
-  test('should emit onUpdated event when updating description', () => {
+  test("should emit onUpdated event when updating description", () => {
     const onUpdated = jest.fn();
 
     render(<ItemList task={task} onUpdated={onUpdated} />);
 
-    const input = screen.getByDisplayValue("task test")
+    const input = screen.getByDisplayValue("task test");
 
-    input.focus()
-    fireEvent.change(input, { target: { value: 'update description' } });
+    input.focus();
+    fireEvent.change(input, { target: { value: "update description" } });
     fireEvent.focusOut(input);
 
     expect(onUpdated).toHaveBeenCalledTimes(1);
   });
 
-  test('not should emit onUpdated event when updating description empty', () => {
+  test("not should emit onUpdated event when updating description empty", () => {
     const onUpdated = jest.fn();
 
     render(<ItemList task={task} onUpdated={onUpdated} />);
 
-    const input = screen.getByDisplayValue("task test")
+    const input = screen.getByDisplayValue("task test");
 
-    input.focus()
-    fireEvent.change(input, { target: { value: '' } });
+    input.focus();
+    fireEvent.change(input, { target: { value: "" } });
     fireEvent.focusOut(input);
 
     expect(onUpdated).toHaveBeenCalledTimes(0);
