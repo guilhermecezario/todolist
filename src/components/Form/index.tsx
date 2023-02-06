@@ -35,6 +35,7 @@ export default function Form({ onSubmit }: FormProps) {
         placeholder="Descreva a nova tarefa"
         value={description}
         onChange={handleChange}
+        required
       />
 
       <Button type="submit">Adicionar</Button>

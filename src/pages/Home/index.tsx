@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Container } from './styles';
 
 import Form from '../../components/Form'
 import List from '../../components/List'
+
+import { api } from '../../services/api';
 
 interface Task {
   id: string,
@@ -12,31 +14,28 @@ interface Task {
 }
 
 export default function Home() {
-  const [tasks, setTasks] = useState([
-    {
-      id: "1",
-      description: "Dormir cedo",
-      finished: false,
-    },
-    {
-      id: "2",
-      description: "Dormir cedo",
-      finished: false,
-    },
-    {
-      id: "3",
-      description: "Dormir cedo",
-      finished: false,
-    },
-  ])
+  const [tasks, setTasks] = useState<Task[]>([])
 
-  function handleUpdateTask(task: Task) {
-    setTasks(tasks.map((t) => t.id !== task.id ? t : task))
+  async function fetchTasks() {
+    const response = await api.get<Task[]>('/tasks');
+
+    setTasks(response.data)
   }
 
-  function handleSubmit(task: Task) {
-    task.id = String(Math.floor(Math.random() * 1000))
-    setTasks([...tasks, task])
+  useEffect(() => {
+    fetchTasks();
+  }, [])
+
+  async function handleUpdateTask(task: Task) {
+    const response = await api.patch<Task>(`/tasks/${task.id}`, task);
+
+    setTasks(tasks.map((t) => t.id !== task.id ? t : response.data))
+  }
+
+  async function handleSubmit(task: Task) {
+    const response = await api.post<Task>('/tasks', task);
+
+    setTasks([...tasks, response.data])
   }
 
   return (

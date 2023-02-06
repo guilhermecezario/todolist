@@ -26,6 +26,12 @@ export default function ItemList({ task, onUpdated }: ItemListProps) {
   }
 
   function handleUpdateDescription() {
+    if (!description) {
+      setDescription(task.description)
+
+      return;
+    }
+
     onUpdated({
       ...task,
       description
@@ -39,9 +45,9 @@ export default function ItemList({ task, onUpdated }: ItemListProps) {
   return (
     <Container>
       {task.finished ? (
-        <MdCheckCircleOutline onClick={handleUpdateFinished}/>
+        <MdCheckCircleOutline onClick={handleUpdateFinished} size={25}/>
       ) : (
-        <MdRadioButtonUnchecked onClick={handleUpdateFinished}/>
+        <MdRadioButtonUnchecked onClick={handleUpdateFinished} size={25}/>
       )}
 
       <input

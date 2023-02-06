@@ -19,7 +19,7 @@ export default function List({ tasks, onUpdated }: ListProps) {
   return (
     <Container>
       {tasks.map((task) => (
-        <ItemList task={task} onUpdated={onUpdated}/>
+        <ItemList task={task} onUpdated={onUpdated} key={task.id} />
       ))}
     </Container>
   );
