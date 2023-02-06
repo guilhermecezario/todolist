@@ -4,7 +4,7 @@ import { Container } from './styles';
 
 import ItemList from '../ItemList'
 
-interface Task {
+export interface Task {
   id: string,
   description: string,
   finished: boolean,
@@ -23,4 +23,10 @@ export default function List({ tasks, onUpdated }: ListProps) {
       ))}
     </Container>
   );
+}
+
+List.defaultProps = {
+  tasks: [],
+  onUpdated: () => {
+  },
 }
