@@ -14,4 +14,14 @@ export const Container = styled.li`
   > p {
     margin-left: 10px;
   }
+
+  input {
+    width: 100%;
+    height: 40px;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    padding: 0 24px;
+    margin-left: 10px;
+  }
 `;

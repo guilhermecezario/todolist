@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ChangeEvent, useState } from 'react';
 
 import { Container } from './styles';
 
@@ -16,11 +16,24 @@ interface ItemListProps {
 }
 
 export default function ItemList({ task, onUpdated }: ItemListProps) {
+  const [description, setDescription] = useState(task.description) 
+
   function handleUpdateFinished() {
     onUpdated({
       ...task,
       finished: !task.finished
     })
+  }
+
+  function handleUpdateDescription() {
+    onUpdated({
+      ...task,
+      description
+    })
+  }
+
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    setDescription(event.target.value);
   }
 
   return (
@@ -30,7 +43,14 @@ export default function ItemList({ task, onUpdated }: ItemListProps) {
       ) : (
         <MdRadioButtonUnchecked onClick={handleUpdateFinished}/>
       )}
-      <p>{ task.description }</p>
+
+      <input
+        type="text"
+        value={description}
+        onChange={handleChange}
+        id={task.id}
+        onBlur={handleUpdateDescription}
+      />
     </Container>
   );
 }

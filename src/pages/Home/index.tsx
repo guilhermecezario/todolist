@@ -34,9 +34,14 @@ export default function Home() {
     setTasks(tasks.map((t) => t.id !== task.id ? t : task))
   }
 
+  function handleSubmit(task: Task) {
+    task.id = String(Math.floor(Math.random() * 1000))
+    setTasks([...tasks, task])
+  }
+
   return (
     <Container>
-      <Form />
+      <Form onSubmit={handleSubmit} />
       <List tasks={tasks} onUpdated={handleUpdateTask}/>
     </Container>
   );
