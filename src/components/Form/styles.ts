@@ -9,7 +9,7 @@ export const Form = styled.form`
 `;
 
 export const Input = styled.input`
-  width: 15rem;
+  width: 100%;
   height: 40px;
   color: #333;
   border: 1px solid #dcdce6;
