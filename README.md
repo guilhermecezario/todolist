@@ -17,8 +17,8 @@ Após ter instalado as dependências necessárias, rode os comandos abaixo em se
   # Entre na pasta do projeto
   $ cd todolist
 
-  # Renomeie o arquivo de variaveis ambiente
-  $ mv .env.example .env
+  # Copie e renomeie o arquivo de variaveis ambiente
+  $ cp .env.example .env
 
   # Instale as dependências
   $ yarn install
