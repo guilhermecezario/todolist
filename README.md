@@ -29,6 +29,11 @@ Após ter instalado as dependências necessárias, rode os comandos abaixo em se
   $ yarn start
 ```
 
+O projeto vai estar rodando em:
+```bash
+  http://localhost:3000
+```
+
 ## Instruções de Testes
 Para rodar os teste em sua maquina basta rodar o comandos abaixo em seu terminal
 
