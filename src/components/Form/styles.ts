@@ -16,15 +16,22 @@ export const Input = styled.input`
   border-radius: 8px;
   padding: 0 24px;
   margin-right: 10px;
+
+  background-color: rgb(249 250 251);
 `;
 
 export const Button = styled.button`
   height: 40px;
-  background: #333;
+  background: rgb(255 255 255);
   border: 0;
   border-radius: 8px;
-  color: #fff;
   font-weight: 600;
   font-size: 14px;
   padding: 0px 10px;
+
+  border: 1px solid rgb(229 231 235);
+
+  :hover {
+    background-color: rgb(243 244 246);
+  }
 `;

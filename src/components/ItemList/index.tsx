@@ -46,19 +46,23 @@ export default function ItemList({ task, onUpdated }: ItemListProps) {
     <Container>
       <Button onClick={handleUpdateFinished}>
         {task.finished ? (
-          <MdCheckCircleOutline size={25} />
+          <MdCheckCircleOutline size={25} color="#94A3B8" />
         ) : (
-          <MdRadioButtonUnchecked size={25} />
+          <MdRadioButtonUnchecked size={25} color="#656F7D" />
         )}
       </Button>
 
-      <input
-        type="text"
-        value={description}
-        onChange={handleChange}
-        id={task.id}
-        onBlur={handleUpdateDescription}
-      />
+      {task.finished ? (
+        <p>{description}</p>
+      ) : (
+        <input
+          type="text"
+          value={description}
+          onChange={handleChange}
+          id={task.id}
+          onBlur={handleUpdateDescription}
+        />
+      )}
     </Container>
   );
 }

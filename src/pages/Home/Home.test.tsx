@@ -1,5 +1,11 @@
 import React from "react";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 
 import MockAdapter from "axios-mock-adapter";
 
@@ -21,7 +27,7 @@ describe("Home", () => {
   test("should render tasks", async () => {
     apiMock.onGet("tasks").reply(200, tasks);
 
-    render(<Home />);
+    act(() => render(<Home />));
 
     await waitFor(() => {
       tasks.forEach((task) => {
@@ -32,25 +38,22 @@ describe("Home", () => {
 
   test("should update task", async () => {
     apiMock.onGet("tasks").reply(200, tasks);
-    apiMock
-      .onPatch("tasks/1")
-      .reply(200, { ...tasks, description: "update description" });
-
-    render(<Home />);
-
-    const input = await waitFor(() => {
-      return screen.getByDisplayValue("task test");
+    apiMock.onPatch("tasks/1").reply(200, {
+      id: "1",
+      description: "update description",
+      finished: false,
     });
+
+    act(() => render(<Home />));
+
+    const input = await waitFor(() => screen.getByDisplayValue("task test"));
 
     input.focus();
     fireEvent.change(input, { target: { value: "update description" } });
-    fireEvent.focusOut(input);
 
-    await waitFor(() => {
-      expect(
-        screen.getByDisplayValue("update description")
-      ).toBeInTheDocument();
-    });
+    await act(() => fireEvent.focusOut(input));
+
+    expect(screen.getByDisplayValue("update description")).toBeInTheDocument();
   });
 
   test("should create task", async () => {
@@ -61,17 +64,17 @@ describe("Home", () => {
       finished: false,
     });
 
-    render(<Home />);
+    act(() => render(<Home />));
 
     const input = screen.getByPlaceholderText("Descreva a nova tarefa");
     const button = screen.getByText("Adicionar");
 
     fireEvent.change(input, { target: { value: "add description" } });
 
-    fireEvent.click(button);
+    await act(() => fireEvent.click(button));
 
-    await waitFor(() => {
-      expect(screen.getByDisplayValue("add description")).toBeInTheDocument();
-    });
+    fireEvent.change(input, { target: { value: "" } });
+
+    expect(screen.getByDisplayValue("add description")).toBeInTheDocument();
   });
 });
